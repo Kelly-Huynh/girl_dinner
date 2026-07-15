@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Girl Dinner</string>
+    <string name="recipe1_title">Burgers</string>
+    <string name="recipe_cooking_time">Cooking Time</string>
+    <string name="recipe1_cooking_time">20 mins</string>
+    <string name="recipe_servings">Servings</string>
+    <string name="recipe1_servings">4</string>
+    <string name="recipe_ingredients_heading">Ingredients</string>
+    <string name="recipe1_ingredients1">4 Burger Patties</string>
+    <string name="recipe1_ingredients2">4 Buns</string>
+    <string name="recipe1_ingredients3">Lettuce</string>
+    <string name="recipe1_ingredients4">Tomato slices</string>
+    <string name="recipe1_ingredients5">Sliced onions</string>
+    <string name="recipe1_ingredients6">Burger Sauce</string>
+    <string name="recipe_instructions_heading">Instructions</string>
+    <string name="recipe1_instruction1">1. Preheat grill to 200°C.</string>
+    <string name="recipe1_instruction2">2. Add patties onto baking tray to grill for 8 minutes.</string>
+    <string name="recipe1_instruction3">3. Flip patties and grill for another 8 minutes.</string>
+    <string name="recipe1_instruction4">4. Add patties onto baking tray to grill for 8 minutes.</string>
 </resources>
