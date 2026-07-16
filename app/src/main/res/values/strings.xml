@@ -1,7 +1,3 @@
 <resources>
     <string name="app_name">Girl Dinner</string>
-    <string name="recipe_cooking_time">Cooking Time</string>
-    <string name="recipe_servings">Servings</string>
-    <string name="recipe_ingredients_heading">Ingredients</string>
-    <string name="recipe_instructions_heading">Instructions</string>
 </resources>
