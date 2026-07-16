@@ -15,6 +15,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.girldinner.screens.Home
+import com.example.girldinner.data.allRecipes
+import com.example.girldinner.screens.*
 
 
 class MainActivity : ComponentActivity() {
@@ -33,18 +35,27 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
 @Composable
 fun ScreenMain() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Routes.Home.route) {
-        // Home
         composable(Routes.Home.route) {
-            // pass the navController
             Home(navController = navController)
         }
-        // to add recipe composable when ready
+        composable(Routes.Recipes.route) { backStackEntry ->
+
+            val recipeId =
+                backStackEntry.arguments?.getString("recipeId")?.toInt() ?: 1
+
+            val recipe = allRecipes.first { it.id == recipeId }
+
+            Recipe(recipe = recipe)
+
+        }
     }
 }
+
 
 
 
