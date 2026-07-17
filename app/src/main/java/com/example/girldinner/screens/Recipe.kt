@@ -44,7 +44,7 @@ fun Recipe(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.White), contentAlignment = Alignment.Center
+            .background(Color(0xFFF7D6DC)), contentAlignment = Alignment.Center
     ) {
         Column(
             modifier = Modifier.verticalScroll(rememberScrollState()),
