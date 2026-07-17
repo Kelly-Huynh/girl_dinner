@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.girldinner.ui.theme.GirlDinnerTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.ui.graphics.Color
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
 
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    containerColor = Color.White,
+                    containerColor = MaterialTheme.colorScheme.background,
                     bottomBar = {
                         Surface(color = Color.Red) {
                             AppBottomBar(navController = navController) }
