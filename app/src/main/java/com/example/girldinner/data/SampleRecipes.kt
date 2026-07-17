@@ -3,33 +3,35 @@ package com.example.girldinner.data
 import com.example.girldinner.model.RecipeEntry
 import com.example.girldinner.R
 
-val burgerRecipe = RecipeEntry(
+val airfryerChipNachos = RecipeEntry(
     1,
-    "Burgers",
-    R.drawable.beef_hamburgers,
-    20,
-    4,
+    "Airfryer Chip Nachos",
+    false,
+    R.drawable.airfryer_nachos,
+    25,
+    2,
     listOf(
-        "4 Burger Patties",
-        "4 Buns",
-        "Lettuce",
-        "Tomato slices",
-        "Sliced onions",
-        "Burger Sauce"
+        "750g pkt frozen McCain Air Fryer Steak Cut Chips",
+        "100g (1 cup) grated cheddar cheese",
+        "400g can kidney beans, drained, rinsed",
+        "2 tomatoes, cut into 1cm pieces",
+        "1 avocado, seed removed, cut into 1cm pieces",
+        "85g (1/3 cup) sour cream",
+        "1 spring onion, thinly sliced",
+        "1 lime, cut into wedges"
     ),
     listOf(
-        "Preheat grill to 200°C.",
-        "Add patties onto baking tray to grill for 8 minutes.",
-        "Flip patties, add in sliced onions and grill for another 8 minutes.",
-        "Meanwhile, toast the cut side of buns lightly.",
-        "Spread base of buns with burger sauce.",
-        "Layer on lettuce, tomato, hamburger patty, grilled onions, add more sauce and top with lid of bun."
+        "Place the McCain Air Fryer Steak Cut Chips in the basket of an air fryer and cook at 200°C for 22 minutes, shaking the basket halfway through, or until the chips are lightly golden.",
+        "Sprinkle the chips with cheese and cook for a further 3 minutes or until the cheese has melted.",
+        "Meanwhile, combine the beans, tomato and avocado in a bowl. Season.",
+        "Scatter the cheesy chips with the bean mixture. Season. Serve the nachos topped with sour cream and shallot, and with the lime wedges alongside."
     )
 )
 
 val dumplingSalad = RecipeEntry(
     2,
     "Dumpling Salad",
+    false,
     R.drawable.dumpling_salad,
     15,
     4,
@@ -55,6 +57,7 @@ val dumplingSalad = RecipeEntry(
 val tofuEggRiceBowl = RecipeEntry(
     3,
     "Tofu Egg Rice Bowl",
+    false,
     R.drawable.tofu_egg_rice_bowl,
     10,
     4,
@@ -83,6 +86,7 @@ val tofuEggRiceBowl = RecipeEntry(
 val eggAndSpinachPide = RecipeEntry(
     4,
     "Egg and spinach pide",
+    false,
     R.drawable.egg_spinach_pide,
     20,
     4,
@@ -113,6 +117,7 @@ val eggAndSpinachPide = RecipeEntry(
 val avocadoHummusToast = RecipeEntry(
     5,
     "Avocado and hummus toast",
+    false,
     R.drawable.avocado_hummus_toast,
     5,
     1,
@@ -132,4 +137,36 @@ val avocadoHummusToast = RecipeEntry(
     )
 )
 
-val allRecipes = listOf(burgerRecipe, dumplingSalad, tofuEggRiceBowl, eggAndSpinachPide, avocadoHummusToast)
+val burgerRecipe = RecipeEntry(
+    6,
+    "Burgers",
+    false,
+    R.drawable.beef_hamburgers,
+    20,
+    4,
+    listOf(
+        "4 Burger Patties",
+        "4 Buns",
+        "Lettuce",
+        "Tomato slices",
+        "Sliced onions",
+        "Burger Sauce"
+    ),
+    listOf(
+        "Preheat grill to 200°C.",
+        "Add patties onto baking tray to grill for 8 minutes.",
+        "Flip patties, add in sliced onions and grill for another 8 minutes.",
+        "Meanwhile, toast the cut side of buns lightly.",
+        "Spread base of buns with burger sauce.",
+        "Layer on lettuce, tomato, hamburger patty, grilled onions, add more sauce and top with lid of bun."
+    )
+)
+
+val allRecipes = listOf(
+    airfryerChipNachos,
+    dumplingSalad,
+    tofuEggRiceBowl,
+    eggAndSpinachPide,
+    avocadoHummusToast,
+    burgerRecipe
+)

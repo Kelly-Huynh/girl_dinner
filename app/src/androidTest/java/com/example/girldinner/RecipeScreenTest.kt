@@ -1,19 +1,22 @@
 package com.example.girldinner
 
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import com.example.girldinner.model.RecipeEntry
 import com.example.girldinner.screens.Recipe
 import org.junit.Rule
 import org.junit.Test
 
-class RecipeTest {
+class RecipeScreenTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
     private val testRecipe = RecipeEntry(
         23,
         "Burgers",
+        false,
         R.drawable.beef_hamburgers,
         20,
         4,
@@ -38,7 +41,7 @@ class RecipeTest {
     @Test
     fun displaysRecipeTitle() {
         composeTestRule.setContent {
-            Recipe(recipe = testRecipe)
+            Recipe(recipe = testRecipe, onToggleFavourite = {})
         }
         composeTestRule.onNodeWithText("Burgers").assertExists()
     }
@@ -46,7 +49,7 @@ class RecipeTest {
     @Test
     fun displaysAllIngredients() {
         composeTestRule.setContent {
-            Recipe(recipe = testRecipe)
+            Recipe(recipe = testRecipe, onToggleFavourite = {})
         }
         composeTestRule.onNodeWithText("4 Burger Patties").assertExists()
         composeTestRule.onNodeWithText("4 Buns").assertExists()
@@ -59,7 +62,7 @@ class RecipeTest {
     @Test
     fun displaysAllInstructions() {
         composeTestRule.setContent {
-            Recipe(recipe = testRecipe)
+            Recipe(recipe = testRecipe, onToggleFavourite = {})
         }
         composeTestRule.onNodeWithText("Preheat grill to 200°C.").assertExists()
         composeTestRule.onNodeWithText("Add patties onto baking tray to grill for 8 minutes.").assertExists()
@@ -67,5 +70,17 @@ class RecipeTest {
         composeTestRule.onNodeWithText("Meanwhile, toast the cut side of buns lightly.").assertExists()
         composeTestRule.onNodeWithText("Spread base of buns with burger sauce.").assertExists()
         composeTestRule.onNodeWithText("Layer on lettuce, tomato, hamburger patty, grilled onions, add more sauce and top with lid of bun.").assertExists()
+    }
+
+    @Test
+    fun tappingFavouriteIcon_firesCallback() {
+        var toggleCalled = false
+        composeTestRule.setContent {
+            Recipe(recipe = testRecipe, onToggleFavourite = { toggleCalled = true })
+        }
+
+        composeTestRule.onNodeWithContentDescription("Favourite").performClick()
+
+        assert(toggleCalled) { "onToggleFavourite was not called when tapping the heart icon." }
     }
 }

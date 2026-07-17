@@ -13,6 +13,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,7 +36,11 @@ import com.example.girldinner.ui.theme.GirlDinnerTheme
 
 
 @Composable
-fun Recipe(recipe: RecipeEntry, modifier: Modifier = Modifier) {
+fun Recipe(
+    recipe: RecipeEntry,
+    onToggleFavourite: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -42,14 +51,30 @@ fun Recipe(recipe: RecipeEntry, modifier: Modifier = Modifier) {
 //            horizontalAlignment = Alignment.CenterHorizontally
 
         ) {
-            Text(
-                recipe.title,
-                fontWeight = FontWeight.Bold,
-                fontSize = 30.sp,
-                modifier = Modifier
-                    .padding(10.dp),
-                color = Color.Black
-            )
+            Row (
+                modifier = Modifier.fillMaxWidth().padding(10.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    recipe.title,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 30.sp,
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(10.dp),
+                    color = Color.Black
+                )
+                IconToggleButton(
+                    checked = recipe.isFavourite,
+                    onCheckedChange = { onToggleFavourite() }
+                ) {
+                    Icon(
+                        imageVector = if (recipe.isFavourite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                        contentDescription = "Favourite",
+                        tint = if (recipe.isFavourite) Color.Red else Color.Gray
+                    )
+                }
+            }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(10.dp)
@@ -143,7 +168,10 @@ fun Recipe(recipe: RecipeEntry, modifier: Modifier = Modifier) {
 @Composable
 fun RecipePreview() {
     GirlDinnerTheme {
-        Recipe(allRecipes[1])
+        Recipe(
+            recipe = allRecipes[3],
+            onToggleFavourite = {}
+        )
     }
 }
 
