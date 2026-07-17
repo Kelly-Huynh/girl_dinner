@@ -29,6 +29,7 @@ import com.example.girldinner.data.*
 import com.example.girldinner.model.RecipeEntry
 import com.example.girldinner.ui.theme.GirlDinnerTheme
 
+
 @Composable
 fun Recipe(recipe: RecipeEntry, modifier: Modifier = Modifier) {
     Box(
@@ -145,3 +146,4 @@ fun RecipePreview() {
         Recipe(allRecipes[1])
     }
 }
+
