@@ -5,4 +5,6 @@ sealed class Routes(val route: String) {
     data object Recipes : Routes("recipes/{recipeId}") {
         fun createRoute(recipeId: Int) = "recipes/$recipeId"
     }
+    data object Favourites : Routes("favourites")
+    data object Search : Routes("search")
 }

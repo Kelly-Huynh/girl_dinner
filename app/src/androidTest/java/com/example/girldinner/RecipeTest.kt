@@ -14,6 +14,7 @@ class RecipeTest {
     private val testRecipe = RecipeEntry(
         23,
         "Burgers",
+        false,
         R.drawable.beef_hamburgers,
         20,
         4,
@@ -38,7 +39,7 @@ class RecipeTest {
     @Test
     fun displaysRecipeTitle() {
         composeTestRule.setContent {
-            Recipe(recipe = testRecipe)
+            Recipe(recipe = testRecipe, onToggleFavourite = {})
         }
         composeTestRule.onNodeWithText("Burgers").assertExists()
     }
@@ -46,7 +47,7 @@ class RecipeTest {
     @Test
     fun displaysAllIngredients() {
         composeTestRule.setContent {
-            Recipe(recipe = testRecipe)
+            Recipe(recipe = testRecipe, onToggleFavourite = {})
         }
         composeTestRule.onNodeWithText("4 Burger Patties").assertExists()
         composeTestRule.onNodeWithText("4 Buns").assertExists()
@@ -59,7 +60,7 @@ class RecipeTest {
     @Test
     fun displaysAllInstructions() {
         composeTestRule.setContent {
-            Recipe(recipe = testRecipe)
+            Recipe(recipe = testRecipe, onToggleFavourite = {})
         }
         composeTestRule.onNodeWithText("Preheat grill to 200°C.").assertExists()
         composeTestRule.onNodeWithText("Add patties onto baking tray to grill for 8 minutes.").assertExists()
