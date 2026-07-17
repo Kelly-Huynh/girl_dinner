@@ -7,8 +7,13 @@ import org.junit.Assert.assertTrue
 
 class SampleRecipesTest {
     @Test
-    fun `burgerRecipe has id of 1`() {
-        assertEquals(1, burgerRecipe.id)
+    fun `airfryerChipNachos has id of 1`() {
+        assertEquals(1, airfryerChipNachos.id)
+    }
+
+    @Test
+    fun `burgerRecipe has id of 6`() {
+        assertEquals(6, burgerRecipe.id)
     }
 
     @Test
@@ -18,7 +23,7 @@ class SampleRecipesTest {
 
     @Test
     fun `allRecipes can find a recipe by id`() {
-        val found = allRecipes.find { it.id == 1 }
+        val found = allRecipes.find { it.id == 6 }
         assertEquals("Burgers", found?.title)
     }
 
@@ -29,6 +34,15 @@ class SampleRecipesTest {
             assert(recipe.ingredients.isNotEmpty())
             assert(recipe.instructions.isNotEmpty())
             assert(recipe.imageRes != 0)
+        }
+    }
+
+    @Test
+    fun `allRecipes start with isFavourite as false`() {
+        allRecipes.forEach { recipe ->
+            assert(!recipe.isFavourite) {
+                "Recipe ${recipe.title} should not be favourited by default"
+            }
         }
     }
 }

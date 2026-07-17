@@ -26,8 +26,13 @@ fun Search(navController: NavController, viewModel: RecipeViewModel) {
     var query by remember { mutableStateOf("") }
     val filteredRecipes = viewModel.allRecipes.filter {
         it.title.contains(query, ignoreCase = true) ||
-        it.ingredients.any { ingredient -> ingredient.contains(query, ignoreCase = true) } ||
-        it.instructions.any { i -> i.contains(query, ignoreCase = true) }
+                it.ingredients.any { ingredient ->
+                    ingredient.contains(
+                        query,
+                        ignoreCase = true
+                    )
+                } ||
+                it.instructions.any { i -> i.contains(query, ignoreCase = true) }
     }
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         OutlinedTextField(
@@ -36,15 +41,22 @@ fun Search(navController: NavController, viewModel: RecipeViewModel) {
             label = { Text("Search recipes") },
             modifier = Modifier.padding(bottom = 8.dp)
         )
-        LazyColumn {
-            items(filteredRecipes) { recipe ->
-                RecipeCard(
-                    recipe = recipe,
-                    onClick = {
-                        navController.navigate(Routes.Recipes.createRoute(recipe.id))
-                    },
-                    onToggleFavourite = { viewModel.toggleFavourite(recipe.id) }
-                )
+        if (filteredRecipes.isEmpty() && query.isNotEmpty()) {
+            Text(
+                text = "No recipes found for \"$query\"",
+                modifier = Modifier.padding(top = 16.dp)
+            )
+        } else {
+            LazyColumn {
+                items(filteredRecipes) { recipe ->
+                    RecipeCard(
+                        recipe = recipe,
+                        onClick = {
+                            navController.navigate(Routes.Recipes.createRoute(recipe.id))
+                        },
+                        onToggleFavourite = { viewModel.toggleFavourite(recipe.id) }
+                    )
+                }
             }
         }
     }
