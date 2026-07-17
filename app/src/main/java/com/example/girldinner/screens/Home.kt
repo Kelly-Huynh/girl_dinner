@@ -2,10 +2,14 @@ package com.example.girldinner.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -38,17 +42,24 @@ fun Home(navController: NavHostController, viewModel: RecipeViewModel) {
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.logo),
-            contentDescription = "Girl Dinner logo",
+        Box(
             modifier = Modifier
+                .size(140.dp) // adjust to match your current logo size
                 .clip(CircleShape)
-                .graphicsLayer(
-                    scaleX = 1.3f,
-                    scaleY = 1.3f
-                ),
-            contentScale = ContentScale.Crop
-        )
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.logo),
+                contentDescription = "Girl Dinner logo",
+                modifier = Modifier
+                    .fillMaxSize()
+                    .graphicsLayer(
+                        scaleX = 1.3f,
+                        scaleY = 1.3f
+                    )
+                    .offset(y = 8.dp), // nudge down/up to taste
+                contentScale = ContentScale.Crop
+            )
+        }
         LazyColumn (
             contentPadding = PaddingValues(vertical = 16.dp)
         ) {
@@ -66,7 +77,7 @@ fun Home(navController: NavHostController, viewModel: RecipeViewModel) {
             }
         }
     }
-    }
+}
 
 @Preview(showBackground = true)
 @Composable
@@ -77,5 +88,4 @@ fun HomePreview() {
         Home(navController = mockNavController, viewModel = viewModel)
     }
 }
-
 
