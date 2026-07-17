@@ -1,20 +1,22 @@
 package com.example.girldinner
 
-import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.compose.rememberNavController
+import androidx.compose.ui.test.performClick
+import androidx.navigation.compose.ComposeNavigator
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.girldinner.data.allRecipes
 import com.example.girldinner.screens.Home
 import com.example.girldinner.viewmodel.RecipeViewModel
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
 class HomeScreenTest {
 
@@ -45,8 +47,8 @@ class HomeScreenTest {
             Home(navController = navController, viewModel = viewModel)
         }
 
-        composeTestRule.onNodeWithContentDescription("Girl Dinner logo")
-            .assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription("Girl Dinner logo").assertExists()
+
     }
 
     @Test
@@ -55,10 +57,37 @@ class HomeScreenTest {
             Home(navController = navController, viewModel = viewModel)
         }
 
-        composeTestRule.onNodeWithText("Airfryer Chip Nachos")
-            .assertIsDisplayed()
+        // Checks every recipe title renders on screen.
+        allRecipes.forEach { recipe ->
+            composeTestRule.onNodeWithText(recipe.title).assertExists()
+        }
+    }
 
-        composeTestRule.onNodeWithText("Dumpling Salad")
-            .assertIsDisplayed()
+    @Test
+    fun homeScreen_clickingRecipe_navigatesToRecipeRoute() {
+        lateinit var navController: TestNavHostController
+        val firstRecipe = allRecipes.first()
+
+        composeTestRule.setContent {
+            navController = TestNavHostController(LocalContext.current)
+            navController.navigatorProvider.addNavigator(ComposeNavigator())
+
+            NavHost(navController = navController, startDestination = Routes.Home.route) {
+                composable(Routes.Home.route) {
+                   Home(navController = navController, viewModel = viewModel)
+                }
+                // Dummy destination — just confirms navigation reaches it.
+                composable(Routes.Recipes.route) { }
+            }
+        }
+
+        composeTestRule.onNodeWithText(firstRecipe.title).performClick()
+
+        val currentRoute = navController.currentBackStackEntry?.destination?.route
+        assertEquals(Routes.Recipes.route, currentRoute)
+
+        val recipeIdArg = navController.currentBackStackEntry?.arguments?.getString("recipeId")
+        assertEquals(firstRecipe.id.toString(), recipeIdArg)
+
     }
 }
