@@ -17,6 +17,8 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 
 @Composable
 fun RecipeCard(
@@ -52,11 +54,15 @@ fun RecipeCard(
                 )
                 IconToggleButton(
                     checked = recipe.isFavourite,
-                    onCheckedChange = { onToggleFavourite() }
+                    onCheckedChange = { onToggleFavourite() },
+                    modifier = Modifier.semantics {
+                        // Set the description here so the test can find the button itself
+                        contentDescription = if (recipe.isFavourite) "Remove from Favourites" else "Add to Favourites"
+                    }
                 ) {
                     Icon(
                         imageVector = if (recipe.isFavourite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                        contentDescription = "Favourite",
+                        contentDescription = null,
                         tint = if (recipe.isFavourite) Color.Red else Color.Gray
                     )
                 }

@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.navigation.testing)
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
@@ -56,7 +57,10 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
-//    val nav_version = "2.7.5"
-//    implementation("androidx.navigation:navigation-compose:$nav_version")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.navigation:navigation-testing:2.8.0")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.7.0")
+    androidTestImplementation("org.mockito:mockito-android:5.11.0")
+    androidTestImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.7.0")
 }

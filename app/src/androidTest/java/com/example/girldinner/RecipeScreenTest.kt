@@ -1,13 +1,15 @@
 package com.example.girldinner
 
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import com.example.girldinner.model.RecipeEntry
 import com.example.girldinner.screens.Recipe
 import org.junit.Rule
 import org.junit.Test
 
-class RecipeTest {
+class RecipeScreenTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
@@ -68,5 +70,17 @@ class RecipeTest {
         composeTestRule.onNodeWithText("Meanwhile, toast the cut side of buns lightly.").assertExists()
         composeTestRule.onNodeWithText("Spread base of buns with burger sauce.").assertExists()
         composeTestRule.onNodeWithText("Layer on lettuce, tomato, hamburger patty, grilled onions, add more sauce and top with lid of bun.").assertExists()
+    }
+
+    @Test
+    fun tappingFavouriteIcon_firesCallback() {
+        var toggleCalled = false
+        composeTestRule.setContent {
+            Recipe(recipe = testRecipe, onToggleFavourite = { toggleCalled = true })
+        }
+
+        composeTestRule.onNodeWithContentDescription("Favourite").performClick()
+
+        assert(toggleCalled) { "onToggleFavourite was not called when tapping the heart icon." }
     }
 }
