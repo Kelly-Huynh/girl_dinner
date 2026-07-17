@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.girldinner.Routes
@@ -32,7 +33,9 @@ fun Favourites(navController: NavController, viewModel: RecipeViewModel) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(
                     text = "No girl dinners saved yet... let's find some snacks! 🍇🧀",
-                    style = MaterialTheme.typography.bodyLarge
+                    style = MaterialTheme.typography.bodyLarge,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(horizontal = 32.dp)
                 )
             }
         } else {
